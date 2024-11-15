@@ -1,141 +1,143 @@
 <?php
 namespace silentlun\alisms\lib;
+
 /**
  * AcsRequest.php
  * @author: allen
- * @date  2020年5月12日上午11:29:14
- * @copyright  Copyright igkcms
+ * @date 2020年5月12日上午11:29:14
+ * @copyright Copyright igkcms
  */
-
+#[AllowDynamicProperties]
 abstract class AcsRequest
 {
-    protected  $actionName;
-	protected  $method;
-	protected  $protocolType = "https";
-	
-	protected $queryParameters = array();
-	protected $headers = array();
-	
-	
-	private $domainParameters = array();
-	
-	function  __construct()
-	{
-	    $this->headers["x-sdk-client"] = "php/2.0.0";
-	    $this->initialize();
-	}
-	
-	private function initialize()
-	{
-	    $this->setMethod("POST");
-	    $this->setAcceptFormat("JSON");
-	}
+    protected string $actionName = '';
+    protected string $method = 'POST';
+    protected string $protocolType = 'https';
+    protected string $acceptFormat = 'JSON';
 
-	
-	public function getDomainParameter()
-	{
-	    return $this->domainParameters;
-	}
-	
-	public function putDomainParameters($name, $value)
-	{
-	    $this->domainParameters[$name] = $value;
-	}
-	
-	public function getVersion()
-	{
-		return $this->version;
-	}
-	
-	public function setVersion($version)
-	{
-		$this->version = $version;
-	}
-	
-	public function getProduct()
-	{
-		return $this->product;
-	}
-	
-	public function setProduct($product)
-	{
-		$this->product = $product;
-	}
-	
-	public function getActionName()
-	{
-		return $this->actionName;
-	}
-	
-	public function setActionName($actionName)
-	{
-		$this->actionName = $actionName;
-	}
-	
-	public function getAcceptFormat()
-	{
-		return	$this->acceptFormat;
-	}
-	
-	public function setAcceptFormat($acceptFormat)
-	{
-		$this->acceptFormat = $acceptFormat;
-	}
-	
-	public function getQueryParameters()
-	{
-		return $this->queryParameters;
-	}
-	
-	public function getHeaders()
-	{
-		return $this->headers;
-	}
-	
-	public function getMethod()
-	{
-		return $this->method;
-	}
-	
-	public function setMethod($method)
-	{
-		$this->method = $method;
-	}
-	
-	public function getProtocol()
-	{
-		return $this->protocolType;
-	}
-	
-	public function setProtocol($protocol)
-	{
-		$this->protocolType = $protocol;
-	}
-	
-	public function getRegionId()
-	{
-		return $this->regionId;
-	}
-	public function setRegionId($region)
-	{
-		$this->regionId = $region;
-	}
-	
-	public function getContent()
+    protected array $queryParameters = [];
+    protected array $headers = [];
+    protected array $domainParameters = [];
+
+    private ?string $version = null;
+    private ?string $product = null;
+    private ?string $regionId = null;
+    private ?string $content = null;
+
+    public function __construct()
+    {
+        $this->headers["x-sdk-client"] = "php/2.0.0";
+        $this->initialize();
+    }
+
+    private function initialize(): void
+    {
+        $this->setMethod("POST");
+        $this->setAcceptFormat("JSON");
+    }
+
+    public function getDomainParameter(): array
+    {
+        return $this->domainParameters;
+    }
+
+    public function putDomainParameters(string $name, $value): void
+    {
+        $this->domainParameters[$name] = $value;
+    }
+
+    public function getVersion(): ?string
+    {
+        return $this->version;
+    }
+
+    public function setVersion(string $version): void
+    {
+        $this->version = $version;
+    }
+
+    public function getProduct(): ?string
+    {
+        return $this->product;
+    }
+
+    public function setProduct(string $product): void
+    {
+        $this->product = $product;
+    }
+
+    public function getActionName(): string
+    {
+        return $this->actionName;
+    }
+
+    public function setActionName(string $actionName): void
+    {
+        $this->actionName = $actionName;
+    }
+
+    public function getAcceptFormat(): string
+    {
+        return $this->acceptFormat;
+    }
+
+    public function setAcceptFormat(string $acceptFormat): void
+    {
+        $this->acceptFormat = $acceptFormat;
+    }
+
+    public function getQueryParameters(): array
+    {
+        return $this->queryParameters;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function setMethod(string $method): void
+    {
+        $this->method = $method;
+    }
+
+    public function getProtocol(): string
+    {
+        return $this->protocolType;
+    }
+
+    public function setProtocol(string $protocol): void
+    {
+        $this->protocolType = $protocol;
+    }
+
+    public function getRegionId(): ?string
+    {
+        return $this->regionId;
+    }
+
+    public function setRegionId(string $region): void
+    {
+        $this->regionId = $region;
+    }
+
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
-    } 
-        
-        
-    public function addHeader($headerKey, $headerValue)
+    }
+
+    public function addHeader(string $headerKey, string $headerValue): void
     {
         $this->headers[$headerKey] = $headerValue;
-    } 
-	
-		
+    }
 }
